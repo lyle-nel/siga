@@ -61,7 +61,7 @@ mkfifo hashcat-2.00/pipe_out
 ```
 Then in one terminal run
 ```
-./hashcat-cli64.bin -m 0 -a 0 --segment-size=1 --generate-rules=10 --outfile-format=2 --outfile=pipe_out hashes.txt pipe_in
+./hashcat-cli64.bin -m 0 -a 0 --segment-size=1 --outfile-format=2 --outfile=pipe_out hashes.txt pipe_in
 ```
 In another terminal run
 ```
