@@ -46,11 +46,32 @@ $ ./siga --md5_mode --organism_file=data/organisms.txt
 ```
 
 ####Example 5: I want to bypass the overhead of md5 and do experiments with plaintext datasets.
-Just remove the --md5_mode argument.
+Just remove the --md5_mode argument. Now data/training.txt can be plaintext passwords.
 ```
 $ ./siga --interactive --verbose
 ```
 The cracked passwords will appear in data/cracked.txt.
+
+####Example 6: I want this program to generate candidate passwords that I can use in hashcat.
+Using named pipes we can create a feedback loop that pushes cracked passwords back into siga, so that siga can keep learning.
+```
+cd hashcat
+mkfifo hashcat-2.00/pipe_in
+mkfifo hashcat-2.00/pipe_out
+```
+Then in one terminal run
+```
+./hashcat-cli64.bin -m 0 -a 0 --segment-size=1 --generate-rules=10 --outfile-format=2 --outfile=pipe_out hashes.txt pipe_in
+```
+In another terminal run
+```
+cat hashcat-2.00/pipe_out | ./siga --dump_candidates > hashcat-2.00/pipe_in
+```
+And if we want to keep the ability to give siga hints we can just do this
+```
+echo some_hint > /proc/`pidof siga`/fd/0
+```
+
 
 ##How it works
 This is a small experiment that focuses on leveraging population-based meta-heuristics for cracking passwords.
