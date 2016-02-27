@@ -12,12 +12,44 @@ There are 3 important files:
 * data/training.txt: location of the words you want to crack reside.
 * data/organism.txt: location of the starting organisms, assuming you dont want to start of with random organisms.
 * data/cracked.txt: where all the cracked passwords will be.
+The location of these files can be changed by providing the right arguments to siga. Look at ./siga -h for more information.
 
-###Example 1: Cracking md5 passwords starting with a random population of organisms
+###Example 1: Cracking md5 passwords starting with a random population of organisms.
 Place the hashes in data/training.txt, then call the program with the following options:
 ```
-./siga --md5_mode
+$ ./siga --md5_mode
 ```
+You can look at the current progress by opening another terminal and running
+```
+$ tail -f data/cracked.txt
+```
+
+###Example 2: Cracking md5 passwords starting with a random population of organisms and I want to set the initial population size to 200.
+```
+$ ./siga --md5_mode --init_population 200
+```
+
+###Example 3: Cracking md5 passwords starting with a random population of organisms and I want to give the program hints as it progresses.
+```
+$ ./siga --md5_mode --interactive --verbose
+```
+The verbose option provides you with startup information as well as a prompt to enter the words.
+
+###Example 4: Cracking md5 passwords starting with a random population of organisms and I want to give the program hints as it progresses, but I want the hints to come from a file.
+```
+$ cat somehints| ./siga --md5_mode --interactive
+```
+Alternatively if you want to disable the random starting population and use words from the organism file exclusively, you can put your hints into the data/organisms.txt file then run
+```
+$ ./siga --md5_mode --organism_file=data/organisms.txt
+```
+
+###Example 5: I want to bypass the overhead of md5 and do experiments with plaintext datasets.
+Just remove the --md5_mode argument.
+```
+$ ./siga --interactive --verbose
+```
+
 The cracked passwords will appear in data/cracked.txt.
 ##How it works
 This is a small experiment that focuses on leveraging population-based meta-heuristics for cracking passwords.
