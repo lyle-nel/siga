@@ -88,7 +88,6 @@ bool Vivarium::matches(const std::string& in)
   auto it = hashes.find(hash);
   if(it == hashes.end())
     return false;
-  cracked.insert(in);
   hashes.erase(it);
   return true;
 }
