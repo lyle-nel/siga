@@ -1,5 +1,6 @@
 # siga(simple genetic algorithm)
 This is a small experiment that focuses on leveraging population-based meta-heuristics for cracking passwords.
+Scroll to the end for a description of how it works.
 
 ##Dependencies
 * It is written in modern c++ and it uses c++11 and c++14 features, so you need a compiler that supports it.
