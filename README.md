@@ -1,6 +1,18 @@
 # siga(simple genetic algorithm)
 This is a small experiment that focuses on leveraging population-based meta-heuristics for cracking passwords.
-Scroll to the end for a description of how it works.
+Scroll to the end for a description of how it works. When cracking the rock_you password list for 5 minutes, it finds the following top 10 longest passwords
+```
+16 aaaaaaaaaaaaaaaa
+15 laaaaaaaaaaaaaa
+15 aaaaaaaaaaaaaaa
+14 tristadanielle
+14 rachelwilliams
+14 princessalinda
+14 ilovechris1234
+14 aaaaaaaaaaaaaa
+13 victormariana
+13 sarahmitchell
+```
 
 ##Dependencies
 * It is written in modern c++ and it uses c++11 and c++14 features, so you need a compiler that supports it.
