@@ -16,6 +16,19 @@ There are 3 important files:
 
 The location of these files can be changed by providing the right arguments to siga. Look at ./siga -h for more information.
 
+####Show me a testrun with the myspace leaked list
+Run
+```
+$ ./siga --organism_file=data/organism.txt
+```
+Then look at cracked.txt with
+```
+$ tail -f data/cracked.txt
+```
+to see how it tries to crack the myspace list. Even though in this mode everything is plaintext, the genetic algorithm can only query if it is a hit or miss, so for the purpose of this demostration, hashing it would not be necessary.
+
+###Other Examples:
+
 ####Example 1: Cracking md5 passwords starting with a random population of organisms.
 Place the hashes in data/training.txt, then call the program with the following options:
 ```
