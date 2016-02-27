@@ -67,7 +67,7 @@ In another terminal run
 ```
 cat hashcat-2.00/pipe_out | ./siga --dump_candidates > hashcat-2.00/pipe_in
 ```
-And if we want to keep the ability to give siga hints we can just do this
+Now if we want to give siga hints we can just do this
 ```
 echo some_hint > /proc/`pidof siga`/fd/0
 ```
