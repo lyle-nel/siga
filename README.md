@@ -12,9 +12,10 @@ There are 3 important files:
 * data/training.txt: location of the words you want to crack reside.
 * data/organism.txt: location of the starting organisms, assuming you dont want to start of with random organisms.
 * data/cracked.txt: where all the cracked passwords will be.
+
 The location of these files can be changed by providing the right arguments to siga. Look at ./siga -h for more information.
 
-###Example 1: Cracking md5 passwords starting with a random population of organisms.
+####Example 1: Cracking md5 passwords starting with a random population of organisms.
 Place the hashes in data/training.txt, then call the program with the following options:
 ```
 $ ./siga --md5_mode
@@ -24,18 +25,18 @@ You can look at the current progress by opening another terminal and running
 $ tail -f data/cracked.txt
 ```
 
-###Example 2: Cracking md5 passwords starting with a random population of organisms and I want to set the initial population size to 200.
+####Example 2: Cracking md5 passwords starting with a random population of organisms and I want to set the initial population size to 200.
 ```
 $ ./siga --md5_mode --init_population 200
 ```
 
-###Example 3: Cracking md5 passwords starting with a random population of organisms and I want to give the program hints as it progresses.
+####Example 3: Cracking md5 passwords starting with a random population of organisms and I want to give the program hints as it progresses.
 ```
 $ ./siga --md5_mode --interactive --verbose
 ```
 The verbose option provides you with startup information as well as a prompt to enter the words.
 
-###Example 4: Cracking md5 passwords starting with a random population of organisms and I want to give the program hints as it progresses, but I want the hints to come from a file.
+####Example 4: Cracking md5 passwords starting with a random population of organisms and I want to give the program hints as it progresses, but I want the hints to come from a file.
 ```
 $ cat somehints| ./siga --md5_mode --interactive
 ```
@@ -44,13 +45,13 @@ Alternatively if you want to disable the random starting population and use word
 $ ./siga --md5_mode --organism_file=data/organisms.txt
 ```
 
-###Example 5: I want to bypass the overhead of md5 and do experiments with plaintext datasets.
+####Example 5: I want to bypass the overhead of md5 and do experiments with plaintext datasets.
 Just remove the --md5_mode argument.
 ```
 $ ./siga --interactive --verbose
 ```
-
 The cracked passwords will appear in data/cracked.txt.
+
 ##How it works
 This is a small experiment that focuses on leveraging population-based meta-heuristics for cracking passwords.
 We start of with a small vector of random strings or strings from file. With each iteration, we mutate and crossover organisms from random positions until one of their children matches a password. We then push the matched child into the end of the container and pop the oldest organism from the front. This way we have all the properties of a genetic algorithm, with the exception of a fitness function, which is not needed since each organism has a limited lifetime due to them being popped from the front of the container. The above mentioned algorithm is quite effective at preserving high impact substrings that can explain a large number of passwords. As these high impact substring are exhausted, mutations of them or new novel substrings will emerge and start to dominate the gene-pool. Since only a single organism can find a specific solution before that solution is removed from the solution space, the solution space will shrink until only highly complex words remain in the solution space.
