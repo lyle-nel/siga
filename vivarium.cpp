@@ -152,8 +152,6 @@ void Vivarium::run()
 
     if(matches(parent_2.gene))
     {
-      if(!setting::dump_candidates)//dont print twice
-        std::cout << parent_2.gene << std::endl;
       cracked << parent_2.gene << std::endl;
       std::lock_guard<std::mutex> lock(pool_mutex);
       pool.push_back(parent_2);
