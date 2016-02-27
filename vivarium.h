@@ -27,7 +27,6 @@ private:
   std::vector<std::string> source_text;
 
   std::unordered_set<std::string> hashes;
-  std::unordered_set<std::string> cracked;
 
   std::deque<Organism> pool;
   Random_dist& random_engine;
