@@ -1,4 +1,24 @@
 # siga(simple genetic algorithm)
+
+##Dependencies
+* It is written in modern c++ and it uses c++11 and c++14 features, so you need a compiler that supports it.
+* You need to have Boost installed since program options and the random generator requires it.
+
+##How to build
+Assuming you have satified the above dependencies, you can just run the silly makefile. You can then call the binary ./siga -h to see the program options.
+
+##How to use
+There are 3 important files:
+* data/training.txt: location of the words you want to crack reside.
+* data/organism.txt: location of the starting organisms, assuming you dont want to start of with random organisms.
+* data/cracked.txt: where all the cracked passwords will be.
+###Example 1: Cracking md5 passwords starting with a random population of organisms
+Place the hashes in data/training.txt, then call the program with the following options:
+```
+./siga --md5_mode
+```
+The cracked passwords will appear in data/cracked.txt.
+##How it works
 This is a small experiment that focuses on leveraging population-based meta-heuristics for cracking passwords.
 We start of with a small vector of random strings or strings from file. With each iteration, we mutate and crossover organisms from random positions until one of their children matches a password. We then push the matched child into the end of the container and pop the oldest organism from the front. This way we have all the properties of a genetic algorithm, with the exception of a fitness function, which is not needed since each organism has a limited lifetime due to them being popped from the front of the container. The above mentioned algorithm is quite effective at preserving high impact substrings that can explain a large number of passwords. As these high impact substring are exhausted, mutations of them or new novel substrings will emerge and start to dominate the gene-pool. Since only a single organism can find a specific solution before that solution is removed from the solution space, the solution space will shrink until only highly complex words remain in the solution space.
 
@@ -17,5 +37,5 @@ Mutation of an organism is done in a similar fashion. Mutation strategies includ
 
 Since we have more than one crossover strategy and mutations strategy, all of them are chosen at random, on the fly, with a uniform distribution.
 
-Future work:
+### Future work:
 Instead of having the distribution for parent 1 and 2 fixed, it might be useful to have a discrete distribution for both parents and have this discrete distribution updated according to where good candidate parents occur. This way, we try to approximate a distribution that wastes as little time considering bad candidate parents as possible. We know already that these distributions exist by empirical measures. 
