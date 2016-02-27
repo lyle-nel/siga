@@ -12,6 +12,7 @@ There are 3 important files:
 * data/training.txt: location of the words you want to crack reside.
 * data/organism.txt: location of the starting organisms, assuming you dont want to start of with random organisms.
 * data/cracked.txt: where all the cracked passwords will be.
+
 ###Example 1: Cracking md5 passwords starting with a random population of organisms
 Place the hashes in data/training.txt, then call the program with the following options:
 ```
