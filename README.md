@@ -3,6 +3,7 @@ This is a small experiment that focuses on leveraging population-based meta-heur
 We start of with a small vector of random strings or strings from file. With each iteration, we mutate and crossover organisms from random positions until one of their children matches a password. We then push the matched child into the end of the container and pop the oldest organism from the front. This way we have all the properties of a genetic algorithm, with the exception of a fitness function, which is not needed since each organism has a limited lifetime due to them being popped from the front of the container. The above mentioned algorithm is quite effective at preserving high impact substrings that can explain a large number of passwords. As these high impact substring are exhausted, mutations of them or new novel substrings will emerge and start to dominate the gene-pool. Since only a single organism can find a specific solution before that solution is removed from the solution space, the solution space will shrink until only highly complex words remain in the solution space.
 
 Some empirical experimentation shows that the distribution of candidate parents that produce viable offspring are non uniformly distributed in the gene-pool, even though the parents have been picked at random in a uniform fashion. Below are the graphs of the experiment.
+
 ![parent 1](https://github.com/lyle-nel/siga/blob/master/documentation/parent_1.png)
 
 ![parent 2](https://github.com/lyle-nel/siga/blob/master/documentation/parent_2.png)
