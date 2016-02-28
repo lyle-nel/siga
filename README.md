@@ -99,6 +99,21 @@ Now if we want to give siga hints we can just do this
 echo some_hint > /proc/`pidof siga`/fd/0
 ```
 
+####Example 7: I want to crack md5 password but I want to stop and resume the simulation at a later time.
+Run the program as usual, no additional arguments are required.
+```
+$ ./siga --md5_mode
+#siga gets killed here
+```
+In order to resume the simulation, all we need to do is copy data/cracked.txt into data/organism.txt
+```
+$ cp data/cracked.txt data/organism.txt
+```
+Now we can resume the simulation with the following
+```
+$ ./siga --md5_mode --organism_file=data/organisms.txt
+```
+This works because the organisms are plain strings and the cracked.txt file stores them in the exact order they appear in the program during execution. 
 
 ##How it works
 We start of with a small vector of random strings or strings from file. With each iteration, we mutate and crossover organisms from random positions until one of their children matches a password. We then push the matched child into the end of the container and pop the oldest organism from the front. Here is a simple image that communicates the essentials of the algorithm:
