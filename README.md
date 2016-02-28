@@ -16,7 +16,7 @@ Scroll to the end for a description of how it works. When cracking the rock_you 
 
 ##Dependencies
 * It is written in modern c++ and it uses c++11 and c++14 features, so you need a compiler that supports it.
-* You need to have Boost installed since program options and the random generator requires it.
+* You need to have Boost installed since program options and the random generator requires it. I would recommend Boost 1.6, since I have had problems with earlier versions when it comes to program options.
 
 ##How to build
 Assuming you have satified the above dependencies, you can just run the silly makefile. You can then call the binary ./siga -h to see the program options.
