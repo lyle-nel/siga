@@ -38,9 +38,9 @@ Assuming you have satified the above dependencies, you can just run the silly ma
 
 ##How to use
 There are 3 important files:
-* data/training.txt: location of the words you want to crack reside.
-* data/organism.txt: location of the starting organisms, assuming you dont want to start of with random organisms.
-* data/cracked.txt: where all the cracked passwords will be.
+* data/training.txt: location of the words you want to crack reside. In md5_mode you will put your hashes here. Currently it hash the hashed myspace leaked list in it.
+* data/organism.txt: location of the starting organisms, assuming you dont want to start of with random organisms. Currently it has the top 2000 ngrams from the rock_you list.
+* data/cracked.txt: When a password is cracked, it goes here.
 
 The location of these files can be changed by providing the right arguments to siga. Look at ./siga -h for more information.
 
