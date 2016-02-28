@@ -13,6 +13,21 @@ Scroll to the end for a description of how it works. When cracking the rock_you 
 13 victormariana
 13 sarahmitchell
 ```
+After about 18 hours it finds complex passwords like the following:
+```
+21 123456789101112131415
+20 12345678910987654321
+20 12345678910111213141
+20 12345678909876543210
+20 12345678900987654321
+19 tinkerbell123456789
+19 tequieromuchogerald
+19 tequieromuchoandres
+19 paulaalejandrailove
+19 password12345678910
+19 9876543211234567089
+```
+It does find very long (>60 chars) as well but those generally only consist of 1 maybe 2 characters.
 
 ##Dependencies
 * It is written in modern c++ and it uses c++11 and c++14 features, so you need a compiler that supports it.
