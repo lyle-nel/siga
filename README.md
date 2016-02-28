@@ -29,7 +29,7 @@ There are 3 important files:
 
 The location of these files can be changed by providing the right arguments to siga. Look at ./siga -h for more information.
 
-####Show me a testrun with the myspace leaked list
+####Show me a testrun with the md5 hashed myspace leaked list
 Run
 ```
 $ ./siga --md5_mode --organism_file=data/organism.txt
@@ -38,7 +38,7 @@ Then look at cracked.txt with
 ```
 $ tail -f data/cracked.txt
 ```
-to see how it tries to crack the myspace list.
+to see which md5 hashes it has managed to crack from the myspace list.
 
 ###Other Examples:
 
