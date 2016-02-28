@@ -27,7 +27,7 @@ After about 18 hours it finds complex passwords like the following:
 19 password12345678910
 19 9876543211234567089
 ```
-It does find very long (>60 chars) as well but those generally only consist of 1 maybe 2 characters.
+It does find very long passwords (>60 chars) as well but those generally only consist of 1 maybe 2 characters.
 
 ##Dependencies
 * It is written in modern c++ and it uses c++11 and c++14 features, so you need a compiler that supports it.
@@ -114,7 +114,7 @@ Now if we want to give siga hints we can just do this
 echo some_hint > /proc/`pidof siga`/fd/0
 ```
 
-####Example 7: I want to crack md5 password but I want to stop and resume the simulation at a later time.
+####Example 7: I want to crack md5 passwords but I want to stop and resume the simulation at a later time.
 Run the program as usual, no additional arguments are required.
 ```
 $ ./siga --md5_mode
