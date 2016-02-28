@@ -135,7 +135,7 @@ We start of with a small vector of random strings or strings from file. With eac
 
 ![GA](https://github.com/lyle-nel/siga/blob/master/documentation/GA.png)
 
-This way we have all the properties of a genetic algorithm, with the exception of a fitness function, which is not needed since each organism has a limited lifetime due to them being popped from the front of the container. The above mentioned algorithm is quite effective at preserving high impact substrings that can explain a large number of passwords. As these high impact substring are exhausted, mutations of them or new novel substrings will emerge and start to dominate the gene-pool. Since only a single organism can find a specific solution before that solution is removed from the solution space, the solution space will shrink until only highly complex words remain in the solution space.
+This way we have all the properties of a genetic algorithm, with the exception of a fitness function[1], which is not needed since each organism has a limited lifetime due to them being popped from the front of the container. The above mentioned algorithm is quite effective at preserving high impact substrings that can explain a large number of passwords. As these high impact substring are exhausted, mutations of them or new novel substrings will emerge and start to dominate the gene-pool. Since only a single organism can find a specific solution before that solution is removed from the solution space, the solution space will shrink until only highly complex words remain in the solution space.
 
 Some empirical experimentation shows that the distribution of candidate parents that produce viable offspring are non uniformly distributed in the gene-pool, even though the parents have been picked at random in a uniform fashion. Below are the graphs of the experiment.
 
@@ -165,3 +165,5 @@ Since we have more than one crossover strategy and mutations strategy, all of th
 
 ### Future work:
 Instead of having the distribution for parent 1 and 2 fixed, it might be useful to have a discrete distribution for both parents and have this discrete distribution updated according to where good candidate parents occur. This way, we try to approximate a distribution that wastes as little time considering bad candidate parents as possible. We know already that these distributions exist by empirical measures. 
+
+*[1] It has been suggested that checking if an organism matches a password qualifies as the fitness function.*
