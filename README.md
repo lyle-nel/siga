@@ -32,13 +32,13 @@ The location of these files can be changed by providing the right arguments to s
 ####Show me a testrun with the myspace leaked list
 Run
 ```
-$ ./siga --organism_file=data/organism.txt
+$ ./siga --md5_mode --organism_file=data/organism.txt
 ```
 Then look at cracked.txt with
 ```
 $ tail -f data/cracked.txt
 ```
-to see how it tries to crack the myspace list. Even though in this mode everything is plaintext, the genetic algorithm can only query if it is a hit or miss, so for the purpose of this demostration, hashing it would not be necessary.
+to see how it tries to crack the myspace list.
 
 ###Other Examples:
 
