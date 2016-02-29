@@ -9,7 +9,7 @@
 CC = g++-5
 
 # define any compile-time flags
-CFLAGS = -std=c++14 -march=native -Wall -Wextra -Wfatal-errors
+CFLAGS = -std=c++14 -march=native -Wall -Wextra -Wfatal-errors -Ofast
 
 # define any directories containing header files other than /usr/include
 #
