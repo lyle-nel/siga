@@ -66,7 +66,7 @@ You can look at the current progress by opening another terminal and running
 ```
 $ tail -f data/cracked.txt
 ```
-
+Note that we omitted the program argument `--organism_file=data/organism.txt` because we want the simulation to start with a random population.
 ####Example 2: Cracking md5 passwords starting with a random population of organisms and I want to set the initial population size to 200.
 ```
 $ ./siga --md5_mode --init_population 200
