@@ -1,6 +1,6 @@
 # siga(simple genetic algorithm)
 This is a small experiment that focuses on leveraging population-based meta-heuristics for cracking passwords.
-Scroll to the end for a description of how it works. When cracking the rock_you password list for 5 minutes, it finds the following top 10 longest passwords
+Click [here](#how-it-works) to go to the section on how it works. When cracking the rock_you password list for 5 minutes, it finds the following top 10 longest passwords
 ```
 16 aaaaaaaaaaaaaaaa
 15 laaaaaaaaaaaaaa
