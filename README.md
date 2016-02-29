@@ -130,7 +130,7 @@ $ ./siga --md5_mode --organism_file=data/organisms.txt
 ```
 This works because the organisms are plain strings and the cracked.txt file stores them in the exact order they appear in the program during execution. 
 
-####Example 8: I want to want to inflate(expand) an existing password cracking dictionary to contain more of the same words that are already in there.
+####Example 8: I want to want to inflate(expand) an existing password cracking dictionary to contain many variations on words that are already in there.
 
 Here is one way to do it:
 
