@@ -28,6 +28,11 @@ After about 18 hours it finds complex passwords like the following:
 19 9876543211234567089
 ```
 It does find very long passwords (>60 chars) as well but those generally only consist of 1 maybe 2 characters.
+##What can it be used for?
+* Cracking md5 passwords(for now)
+* Expanding smaller dictionaries into larger ones(see Example 8)
+* Bolt itself onto a 3rd party program like hashcat with named pipes(see Example 6)
+* Study genetic algorithms and structures in passwords
 
 ##Dependencies
 * It is written in modern c++ and it uses c++11 and c++14 features, so you need a compiler that supports it.
