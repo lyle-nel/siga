@@ -15,12 +15,12 @@ class Vivarium {
 public:
   Vivarium(Random_dist& rand);
   bool matches(const std::string& in);
-  std::string calc_hash(const std::string& in);
-  void mutate(Organism& organism);
-  int crossover(const Organism& lhs, Organism& rhs);
+  std::string calc_hash(const std::string& in) const;
+  void mutate(Organism& organism) const;
+  int crossover(const Organism& lhs, Organism& rhs) const;
   void run();
   void deredundant();
-  double shannon_word_enthropy(const std::string in);
+  double shannon_word_enthropy(const std::string& in) const;
 
 private:
 

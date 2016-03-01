@@ -58,7 +58,7 @@ Vivarium::Vivarium(Random_dist& rand):random_engine(rand)
 }
 
 #include "library/md5.h"
-std::string Vivarium::calc_hash(const std::string& in)
+std::string Vivarium::calc_hash(const std::string& in) const
 {
   if(setting::md5_mode)
     return md5(in.c_str());
@@ -67,7 +67,7 @@ std::string Vivarium::calc_hash(const std::string& in)
 }
 
 #include <unordered_map>
-double Vivarium::shannon_word_enthropy(const std::string in)
+double Vivarium::shannon_word_enthropy(const std::string& in) const
 {
   std::unordered_map<char,size_t> frequencies;
   for(char ch:in)
@@ -169,7 +169,7 @@ void Vivarium::run()
 //std::cout << "skew_2: " << further_along/(double)pool.size() << std::endl;
 
 
-void Vivarium::mutate(Organism& organism)
+void Vivarium::mutate(Organism& organism) const
 {
   if(!random_engine.bernoulli(setting::mutation_rate))
     return;//high chance of not mutating
@@ -218,7 +218,7 @@ void Vivarium::mutate(Organism& organism)
   mutation_strategy(organism.gene);
 }
 
-int Vivarium::crossover(const Organism& lhs, Organism& rhs)
+int Vivarium::crossover(const Organism& lhs, Organism& rhs) const
 {
   auto full_substitute = [this](const Organism& lhs, Organism& rhs)
   {
