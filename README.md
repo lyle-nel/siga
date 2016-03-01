@@ -39,7 +39,7 @@ It does find very long passwords (>60 chars) as well but those generally only co
 * You need to have Boost installed since program options and the random generator requires it. I would recommend Boost 1.6, since I have had problems with earlier versions when it comes to program options.
 
 ##How to build
-Assuming you have satified the above dependencies, you can just run the silly makefile. You can then call the binary ./siga -h to see the program options.
+Assuming you have satisfied the above dependencies, you can just run the silly makefile. You can then call the binary ./siga -h to see the program options.
 
 ##How to use
 There are 3 important files:
