@@ -147,11 +147,11 @@ void Vivarium::run()
     }while(random_engine.bernoulli(setting::multi_parent_crossover_prob));//chance to combine dna of more than 2 organisms
 
     if(setting::dump_candidates && !duplicate(parent_2.gene))
-      std::cout << parent_2.gene << std::endl;
+      std::cout << parent_2.gene << '\n';
 
     if(matches(parent_2.gene))
     {
-      cracked << parent_2.gene << std::endl;
+      cracked << parent_2.gene << '\n';
       std::lock_guard<std::mutex> lock(pool_mutex);
       pool.push_back(parent_2);
     }
