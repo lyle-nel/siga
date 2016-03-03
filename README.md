@@ -112,7 +112,7 @@ Then in one terminal run
 ```
 In another terminal run
 ```
-cat hashcat-2.00/pipe_out | ./siga --dump_candidates > hashcat-2.00/pipe_in
+cat hashcat-2.00/pipe_out | ./siga --interactive --dump_candidates > hashcat-2.00/pipe_in
 ```
 Now if we want to give siga hints we can just do this
 ```
