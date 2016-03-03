@@ -104,18 +104,6 @@ void Vivarium::run()
       }
     );
 
-  //checks if a duplicate string has passed through this function recently. Its memory of recent elements is 1024
-  std::deque<std::string> precheck_cache;
-  auto duplicate = [&precheck_cache](const std::string& in) -> bool
-  {
-    if(std::find(precheck_cache.begin(), precheck_cache.end(), in) != precheck_cache.end() && !precheck_cache.empty())
-      return true;
-    precheck_cache.push_front(in);
-    if(precheck_cache.size()>1024)//keep the queue small
-      precheck_cache.pop_back();
-    return false;
-  };
-
   while(true)
   {
     size_t parent_1_index = random_engine.uniform_int(0,pool.size()-1);
@@ -129,7 +117,7 @@ void Vivarium::run()
       parent_1_index = random_engine.uniform_int(0,pool.size()-1);
     }while(random_engine.bernoulli(setting::multi_parent_crossover_prob));//chance to combine dna of more than 2 organisms
 
-    if(setting::dump_candidates && !duplicate(parent_2.gene))
+    if(setting::dump_candidates)
       std::cout << parent_2.gene << '\n';
 
     if(matches(parent_2.gene))
