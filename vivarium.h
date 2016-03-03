@@ -19,8 +19,6 @@ public:
   void mutate(Organism& organism) const;
   int crossover(const Organism& lhs, Organism& rhs) const;
   void run();
-  void deredundant();
-  double shannon_word_enthropy(const std::string& in) const;
 
 private:
 

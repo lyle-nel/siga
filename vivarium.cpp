@@ -66,22 +66,6 @@ std::string Vivarium::calc_hash(const std::string& in) const
     return in;//passthrough for now. No need for performance penalty
 }
 
-#include <unordered_map>
-double Vivarium::shannon_word_enthropy(const std::string& in) const
-{
-  std::unordered_map<char,size_t> frequencies;
-  for(char ch:in)
-    ++frequencies[ch];
-  double enthropy = 0;
-  for(auto ch_pair:frequencies)
-  {
-     double freq = static_cast<double>(ch_pair.second)/in.size();
-     enthropy += freq*log2(freq);
-  }
-  enthropy *= -1;
-  return enthropy;
-}
-
 bool Vivarium::matches(const std::string& in)
 {
   std::string hash = calc_hash(in);
@@ -135,8 +119,7 @@ void Vivarium::run()
   while(true)
   {
     size_t parent_1_index = random_engine.uniform_int(0,pool.size()-1);
-    const auto parent_1 = pool[parent_1_index];
-    size_t parent_2_index = random_engine.reverse_exponential_int(pool.size()-1);
+    const size_t parent_2_index = random_engine.reverse_exponential_int(pool.size()-1);
     auto parent_2 = pool[parent_2_index];
 
     mutate(parent_2);
