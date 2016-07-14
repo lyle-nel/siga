@@ -23,7 +23,7 @@ LFLAGS =
 # define any libraries to link into executable:
 #   if I want to link in libraries (libx.so or libx.a) I use the -llibname
 #   option, something like (this will link in libmylib.so and libm.so:
-LIBS = -lpthread -lboost_program_options
+LIBS = -lpthread -lboost_program_options -lcrypto
 
 # define the C source files
 SRCS = main.cpp vivarium.cpp library/md5.cpp setting.cpp

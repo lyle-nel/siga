@@ -20,6 +20,7 @@ int main(int argc, const char *argv[])
       ("multi_parent_crossover_prob", value<double>()->default_value(setting::multi_parent_crossover_prob), "The probability that an organism will have more than 2 parents. This can be advantageous when there exist words(offspring) that can only be composed of more than 2 other words(parents).")
       ("char_list", value<std::string>()->default_value(setting::char_list), "List of characters available to be used to generate random organisms as well as mutations of existing organisms. The character space can always be expanded later with interactive mode.")
       ("md5_mode", "Run the simulation in solo mode. In this mode the training_file is a list md5 hashes to be cracked.")
+      ("sha1_mode", "Same as md5_mode, but just for sha1")
       ("dump_candidates", "Dumps all candidate passwords that are trained from training_file.")
       ("interactive", "Takes hints from stdin. Swearwords and linear keyboard sequences such as qwertyuiop seem to work well with most password lists. This can also be used to expand the character space by entering new characters that are not part of the original char_list.")
       ("organism_file", value<std::string>(), "List of initial organisms to seed the simulation. If this argument is not supplied, the simulation will start with random organisms with a population size of init_population.")
@@ -59,6 +60,10 @@ int main(int argc, const char *argv[])
       setting::md5_mode = true;
     else
       setting::md5_mode = false;
+    if(vm.count("sha1_mode"))
+      setting::sha1_mode = true;
+    else
+      setting::sha1_mode = false;
 
     if(vm.count("dump_candidates"))
       setting::dump_candidates = true;

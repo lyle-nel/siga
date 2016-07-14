@@ -12,6 +12,7 @@ namespace setting
   extern size_t init_population;
   extern size_t max_population;
   extern bool md5_mode;
+  extern bool sha1_mode;
   extern bool interactive;
   extern bool generate_random_organisms;
   extern bool verbose;

@@ -58,12 +58,14 @@ Vivarium::Vivarium(Random_dist& rand):random_engine(rand)
 }
 
 #include "library/md5.h"
+#include "library/sha1.h"
 std::string Vivarium::calc_hash(const std::string& in) const
 {
   if(setting::md5_mode)
     return md5(in.c_str());
-  else
-    return in;//passthrough for now. No need for performance penalty
+  if(setting::sha1_mode)
+    return sha1(in);
+  return in;//passthrough. No need for performance penalty
 }
 
 bool Vivarium::matches(const std::string& in)
@@ -122,7 +124,7 @@ void Vivarium::run()
 
     if(matches(parent_2.gene))
     {
-      cracked << parent_2.gene << '\n';
+      cracked << parent_2.gene << std::endl;
       std::lock_guard<std::mutex> lock(pool_mutex);
       pool.push_back(parent_2);
     }
