@@ -37,6 +37,7 @@ It does find very long passwords (>60 chars) as well but those generally only co
 ##Dependencies
 * It is written in modern c++ and it uses c++11 and c++14 features, so you need a compiler that supports it.
 * You need to have Boost installed since program options and the random generator requires it. I would recommend Boost 1.6, since I have had problems with earlier versions when it comes to program options.
+* Openssl crypto library. In debian/ubuntu `$ apt-get install libssl-dev`
 
 ##How to build
 Assuming you have satisfied the above dependencies, you can just run the silly makefile. You can then call the binary ./siga -h to see the program options.
