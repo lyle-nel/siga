@@ -29,7 +29,7 @@ After about 18 hours it finds complex passwords like the following:
 ```
 It does find very long passwords (>60 chars) as well but those generally only consist of 1 maybe 2 characters.
 ##What can it be used for?
-* Cracking md5 passwords(for now)
+* Cracking md5 and sha1 passwords(for now)
 * Expanding smaller dictionaries into larger ones(see Example 8)
 * Bolt itself onto a 3rd party program like hashcat with named pipes(see Example 6)
 * Study genetic algorithms and structures in passwords
@@ -126,9 +126,9 @@ Run the program as usual, no additional arguments are required.
 $ ./siga --md5_mode
 #siga gets killed here
 ```
-In order to resume the simulation, all we need to do is copy data/cracked.txt into data/organism.txt
+In order to resume the simulation, all we need to do is append data/cracked.txt into data/organism.txt inorder to reintroduce the organisms(in the right order).
 ```
-$ cp data/cracked.txt data/organism.txt
+$ cat data/cracked.txt >> data/organism.txt
 ```
 Now we can resume the simulation with the following
 ```
@@ -157,7 +157,7 @@ We start of with a small vector of random strings or strings from file. With eac
 
 ![GA](https://github.com/lyle-nel/siga/blob/master/documentation/GA.png)
 
-This way we have all the properties of a genetic algorithm, with the exception of a conventional fitness function[1]. Only offspring that crack a password are allowed to enter the genepool. Additionally, pressure is applied to the population by each organism having a limited lifetime to propagate its genes due to the oldest organisms being popped from the front of the container when new ones enter the back. The above mentioned algorithm is quite effective at preserving high impact substrings that can explain a large number of passwords. As these high impact substring are exhausted, mutations of them or new novel substrings will emerge and start to dominate the gene-pool. Since only a single organism can find a specific solution before that solution is removed from the solution space, the solution space will shrink until only highly complex words remain in the solution space.
+This way we have all the properties of a genetic algorithm, with the exception of a conventional fitness function, since the fitness is binary(password match or not). Only offspring that crack a password are allowed to enter the genepool. Additionally, pressure is applied to the population by each organism having a limited lifetime to propagate its genes due to the oldest organisms being popped from the front of the container when new ones enter the back. The above mentioned algorithm is quite effective at preserving high impact substrings that can explain a large number of passwords. As these high impact substring are exhausted, mutations of them or new novel substrings will emerge and start to dominate the gene-pool. Since only a single organism can find a specific solution before that solution is removed from the solution space, the solution space will shrink until only highly complex words remain in the solution space.
 
 Some empirical experimentation shows that the distribution of candidate parents that produce viable offspring are non uniformly distributed in the gene-pool, even though the parents have been picked at random in a uniform fashion. Below are the graphs of the experiment.
 
@@ -173,7 +173,7 @@ For crossover there are 4 strategies:
 * partial_substitute
 * full_substitute.
 
-For partial_insert, we take a random substring from the lhs string and inserts it into a random position in rhs string. The full_insert strategy inserts the full lhs string into a random position in rhs string.
+For partial_insert, we take a random substring from the lhs string and insert it into a random position in rhs string. The full_insert strategy inserts the full lhs string into a random position in rhs string.
 In a similar fashion, partial_substitute substitutes a random substring from lhs into a random position in rhs. Finally, full_substitute substitutes the full lhs string into a random position in rhs. By empirical experimentation, I found that mostly partial_insert and partial_substitute is used by successful organisms, so the other 2 are disabled for now. We don't lose any functionality since the 2 activated strategies can fulfill the role of the disabled ones. The disabled ones are, in a sense, a subset of the activated ones.
 
 Mutation of an organism is done in a similar fashion. Mutation strategies include
@@ -186,6 +186,4 @@ The lhs string is a random string of length [1,5] and the rhs string is an exist
 Since we have more than one crossover strategy and mutations strategy, all of them are chosen at random, on the fly, with a uniform distribution.
 
 ### Future work:
-Instead of having the distribution for parent 1 and 2 fixed, it might be useful to have a discrete distribution for both parents and have this discrete distribution updated according to where good candidate parents occur. This way, we try to approximate a distribution that wastes as little time considering bad candidate parents as possible. We know already that these distributions exist by empirical measures. 
-
-*[1] It has been suggested that checking if an organism matches a password qualifies as the fitness function.*
+Instead of having the distribution for parent 1 and 2 fixed, it might be useful to have a discrete distribution for both parents and have this discrete distribution updated according to where good candidate parents occur. This way, we try to approximate a distribution that wastes as little time considering bad candidate parents as possible. We know already that these distributions exist by empirical measures.
