@@ -7,6 +7,7 @@
 #include <fstream>
 #include <functional>//std::function
 #include "library/lib.h"
+#include "library/bloom_filter.h"
 
 Vivarium::Vivarium(Random_dist& rand):random_engine(rand)
 {
@@ -16,23 +17,36 @@ Vivarium::Vivarium(Random_dist& rand):random_engine(rand)
   if(!setting::generate_random_organisms)
     lib::fill_from_file(setting::organism_file.c_str(), source_text);
 
-  lib::fill_from_file(setting::training_file.c_str(), hashes);
+  std::vector<std::string> hashes_from_file;
+  lib::fill_from_file(setting::training_file.c_str(), hashes_from_file);
+  size_t maximum_size = 600;
+  maximum_size*=1000*1000*8;
+//  uncracked = Bloom_filter(hashes_from_file.size(), Bloom_filter::minimum_false_positives(hashes_from_file.size(),maximum_size));
+//  std::cerr << "False positive rate: "  << Bloom_filter::minimum_false_positives(hashes_from_file.size(),maximum_size) << std::endl;
+uncracked = Bloom_filter(hashes_from_file.size(), 0.0000001);
+
+  cracked = uncracked;
+  for(auto hash:hashes_from_file)
+    uncracked.add(hash);
   if(setting::verbose)
   {
     std::cerr << "Done" << std::endl;
     std::cerr << "Computing hashes" << std::endl;
-    std::cerr << "Initial hash list size" << hashes.size() << std::endl;
+//    std::cerr << "Initial hash list size" << hashes.size() << std::endl;
   }
   if(!setting::generate_random_organisms)
     for(auto& word: source_text)
     {
-      auto it = hashes.find(calc_hash(word));
+/*      auto it = hashes.find(calc_hash(word));
       if(it != hashes.end())
         hashes.erase(it);
+        */
+      if(uncracked.maybe_exists(calc_hash(word)))
+        cracked.add(calc_hash(word));
     }
   if(setting::verbose)
   {
-    std::cerr << "Final hash list size" << hashes.size() << std::endl;
+//    std::cerr << "Final hash list size" << hashes.size() << std::endl;
     std::cerr << "Done" << std::endl;
     std::cerr << "Creating initial organisms" << std::endl;
   }
@@ -71,10 +85,11 @@ std::string Vivarium::calc_hash(const std::string& in) const
 bool Vivarium::matches(const std::string& in)
 {
   std::string hash = calc_hash(in);
-  auto it = hashes.find(hash);
-  if(it == hashes.end())
+  if(!uncracked.maybe_exists(hash))
     return false;
-  hashes.erase(it);
+  if(cracked.maybe_exists(hash))
+    return false;
+  cracked.add(hash);
   return true;
 }
 

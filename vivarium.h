@@ -2,6 +2,7 @@
 #define VIVARIUM_H
 
 #include "library/random_dist.h"
+#include "library/bloom_filter.h"
 #include <deque>
 #include <vector>
 #include <unordered_set>
@@ -24,7 +25,9 @@ private:
 
   std::vector<std::string> source_text;
 
-  std::unordered_set<std::string> hashes;
+//  std::unordered_set<std::string> hashes;
+  Bloom_filter uncracked;
+  Bloom_filter cracked;
 
   std::deque<Organism> pool;
   Random_dist& random_engine;
