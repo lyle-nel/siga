@@ -28,21 +28,21 @@ After about 18 hours it finds complex passwords like the following:
 19 9876543211234567089
 ```
 It does find very long passwords (>60 chars) as well but those generally only consist of 1 maybe 2 characters.
-##What can it be used for?
+## What can it be used for?
 * Cracking md5 and sha1 passwords(for now)
 * Expanding smaller dictionaries into larger ones(see Example 8)
 * Bolt itself onto a 3rd party program like hashcat with named pipes(see Example 6)
 * Study genetic algorithms and structures in passwords
 
-##Dependencies
+## Dependencies
 * It is written in modern c++ and it uses c++11 and c++14 features, so you need a compiler that supports it.
 * You need to have Boost installed since program options and the random generator requires it. I would recommend Boost 1.6, since I have had problems with earlier versions when it comes to program options.
 * Openssl crypto library. In debian/ubuntu `$ apt-get install libssl-dev`
 
-##How to build
+## How to build
 Assuming you have satisfied the above dependencies, you can just run the silly makefile. You can then call the binary ./siga -h to see the program options.
 
-##How to use
+## How to use
 There are 3 important files:
 * data/training.txt: location of the words you want to crack reside. In md5_mode you will put your hashes here. Currently it has the hashed myspace leaked list in it.
 * data/organism.txt: location of the starting organisms, assuming you dont want to start of with random organisms. Currently it has the top 2000 ngrams from the rock_you list.
@@ -50,7 +50,7 @@ There are 3 important files:
 
 The location of these files can be changed by providing the right arguments to siga. Look at ./siga -h for more information.
 
-####Show me a testrun with the md5 hashed myspace leaked list
+#### Show me a testrun with the md5 hashed myspace leaked list
 Run
 ```
 $ ./siga --md5_mode --organism_file=data/organism.txt
@@ -61,9 +61,9 @@ $ tail -f data/cracked.txt
 ```
 to see which md5 hashes it has managed to crack from the myspace list.
 
-###Other Examples:
+### Other Examples:
 
-####Example 1: Cracking md5 passwords starting with a random population of organisms.
+#### Example 1: Cracking md5 passwords starting with a random population of organisms.
 Place the hashes in data/training.txt, then call the program with the following options:
 ```
 $ ./siga --md5_mode
@@ -78,13 +78,13 @@ Note that we omitted the program argument `--organism_file=data/organism.txt` be
 $ ./siga --md5_mode --init_population 200
 ```
 
-####Example 3: Cracking md5 passwords starting with a random population of organisms and I want to give the program hints as it progresses.
+#### Example 3: Cracking md5 passwords starting with a random population of organisms and I want to give the program hints as it progresses.
 ```
 $ ./siga --md5_mode --interactive --verbose
 ```
 The verbose option provides you with startup information as well as a prompt to enter the words.
 
-####Example 4: Cracking md5 passwords starting with a random population of organisms and I want to give the program hints as it progresses, but I want the hints to come from a file.
+#### Example 4: Cracking md5 passwords starting with a random population of organisms and I want to give the program hints as it progresses, but I want the hints to come from a file.
 ```
 $ cat somehints| ./siga --md5_mode --interactive
 ```
@@ -93,14 +93,14 @@ Alternatively if you want to disable the random starting population and use word
 $ ./siga --md5_mode --organism_file=data/organisms.txt
 ```
 
-####Example 5: I want to bypass the overhead of md5 and do experiments with plaintext datasets.
+#### Example 5: I want to bypass the overhead of md5 and do experiments with plaintext datasets.
 Just remove the --md5_mode argument. Now data/training.txt can be plaintext passwords.
 ```
 $ ./siga --interactive --verbose
 ```
 The cracked passwords will appear in data/cracked.txt.
 
-####Example 6: I want this program to generate candidate passwords that I can use in hashcat.
+#### Example 6: I want this program to generate candidate passwords that I can use in hashcat.
 Using named pipes we can create a feedback loop that pushes cracked passwords back into siga, so that siga can keep learning.
 ```
 cd hashcat
@@ -120,7 +120,7 @@ Now if we want to give siga hints we can just do this
 echo some_hint > /proc/`pidof siga`/fd/0
 ```
 
-####Example 7: I want to crack md5 passwords but I want to stop and resume the simulation at a later time.
+#### Example 7: I want to crack md5 passwords but I want to stop and resume the simulation at a later time.
 Run the program as usual, no additional arguments are required.
 ```
 $ ./siga --md5_mode
@@ -136,7 +136,7 @@ $ ./siga --md5_mode --organism_file=data/organisms.txt
 ```
 This works because the organisms are plain strings and the cracked.txt file stores them in the exact order they appear in the program during execution. 
 
-####Example 8: I want to inflate(expand) an existing smaller dictionary into a larger dictionary.
+#### Example 8: I want to inflate(expand) an existing smaller dictionary into a larger dictionary.
 
 Here is one way to do it:
 
@@ -152,7 +152,7 @@ $ sort -u my_super_large_dictionary > my_super_large_deduplicated_dictionary
 ```
 Now you have a super large deduplicated dictionary.
 
-##How it works
+## How it works
 We start of with a small vector of random strings or strings from file. With each iteration, we mutate and crossover organisms from random positions until one of their children matches a password. We then push the matched child into the end of the container and pop the oldest organism from the front. Here is a simple image that communicates the essentials of the algorithm:
 
 ![GA](https://github.com/lyle-nel/siga/blob/master/documentation/GA.png)
